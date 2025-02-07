@@ -29,12 +29,15 @@ export default buildConfig({
   },
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
+    disableIndexHints: true,
     connectOptions: {
       tls: true,
       tlsAllowInvalidCertificates: true,
       tlsCAFile: path.resolve(dirname, 'global-bundle.pem'),
       readPreference: 'primary',
       retryWrites: false,
+      autoIndex: false,
+      autoCreate: false,
     },
   }),
   sharp,
